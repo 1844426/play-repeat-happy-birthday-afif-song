@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Afif!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Bright festival green background */
+            background-color: #2ecc71; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* The Big Start Button - Updated to Blue Gradient */
+        .start-btn {
+            padding: 22px 50px;
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #007adb, #00adb5); /* Vibrant Blue tones */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* SCALED DOWN VIDEO BOX: Large theater style screen instead of full stretch */
+        .video-box {
+            display: none; 
+            width: 85vw; /* Takes up 85% of screen width */
+            max-width: 1000px; /* Limits how wide it can get on large screens */
+            aspect-ratio: 16 / 9; /* Maintains perfect HD video proportions */
+            border: 5px solid #ffffff; /* Clean white border to frame the video */
+            border-radius: 12px;
+            box-shadow: 0px 15px 35px rgba(0,0,0,0.5);
+            background: #000;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        /* Forces the video file to fit naturally inside the frame */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Keeps original video aspect ratio without cutting it off */
+        }
+
+        /* The Red Stop Button pinned in the top-right corner */
+        .stop-btn {
+            display: none; 
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: background 0.2s, transform 0.1s;
+            z-index: 20; 
+        }
+
+        .stop-btn:hover {
+            background-color: #e60000;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startBtn" class="start-btn">🎉 Click Me 🎉</button>
+
+    <button id="stopBtn" class="stop-btn">Stop Video/Audio</button>
+
+    <div id="videoContainer" class="video-box">
+        <video id="musicVideo" controls loop>
+            <source src="afif-birthday.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const videoContainer = document.getElementById('videoContainer');
+        const musicVideo = document.getElementById('musicVideo');
+
+        // Continuous looping engine
+        musicVideo.loop = true;
+
+        // Click Me logic
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';        
+            videoContainer.style.display = 'block';   
+            stopBtn.style.display = 'block';         
+            
+            musicVideo.play();
+        });
+
+        // Stop logic
+        stopBtn.addEventListener('click', () => {
+            musicVideo.pause();
+            musicVideo.currentTime = 0; 
+
+            videoContainer.style.display = 'none';
+            stopBtn.style.display = 'none';
+            startBtn.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
